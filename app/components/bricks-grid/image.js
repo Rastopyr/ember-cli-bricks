@@ -1,0 +1,1 @@
+export { default } from 'ember-cli-bricks/components/bricks-grid/image';

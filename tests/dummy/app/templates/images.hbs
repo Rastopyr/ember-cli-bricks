@@ -1,0 +1,10 @@
+
+{{outlet}}
+
+{{#bricks-grid fullReload=true as | grid |}}
+  {{#each items as | i |}}
+    {{#grid.image}}
+      <img src="{{i}}" alt="">
+    {{/grid.image}}
+  {{/each}}
+{{/bricks-grid}}

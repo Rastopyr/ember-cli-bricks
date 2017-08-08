@@ -1,0 +1,6 @@
+<div class="bricks-container">
+  {{yield (hash
+    item=(component 'bricks-grid/item' repack=(action repack))
+    image=(component 'bricks-grid/image' repack=(action repack))
+  )}}
+</div>

@@ -1,0 +1,6 @@
+{
+  "name": "ember-cli-bricks",
+  "dependencies": {
+    "Faker": "^4.1.0"
+  }
+}
