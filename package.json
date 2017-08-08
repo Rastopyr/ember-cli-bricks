@@ -11,7 +11,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "rastopyr/ember-cli-bricks",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
