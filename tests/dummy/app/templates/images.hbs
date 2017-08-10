@@ -4,6 +4,9 @@
 {{#bricks-grid fullReload=true as | grid |}}
   {{#each items as | i |}}
     {{#grid.image}}
+      <div {{action 'remove' i}}>
+        desctroy
+      </div>
       <img src="{{i}}" alt="">
     {{/grid.image}}
   {{/each}}

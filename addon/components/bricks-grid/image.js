@@ -19,6 +19,6 @@ export default Component.extend({
   }),
 
   sendRepackOnDestroy: on('willDestroyElement', function() {
-    run.next(() => this.sendAction('repack'))
+    run.next(() => run.schedule('afterRender', () => this.sendAction('repack')))
   }),
 });
