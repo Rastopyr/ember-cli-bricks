@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bricks-grid/item';
 
-const { Component, on, run } = Ember;
+const { Component, on } = Ember;
 
 export default Component.extend({
   layout,
@@ -16,9 +16,5 @@ export default Component.extend({
     });
 
     this.sendAction('repack');
-  }),
-
-  sendRepackOnDestroy: on('willDestroyElement', function() {
-    run.next(() => run.schedule('afterRender', () => this.sendAction('repack')))
   }),
 });

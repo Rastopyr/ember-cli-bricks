@@ -83,14 +83,18 @@ export default Component.extend({
 
   repack() {
     const {
-      fullReload, brickInstance, isPacked
+      fullReload,
+      brickInstance,
+      isPacked,
+      isDestroyed,
     } = this.getProperties(
       'brickInstance',
       'fullReload',
-      'isPacked'
+      'isPacked',
+      'isDestroyed'
     );
 
-    if (!brickInstance) {
+    if (!brickInstance || isDestroyed) {
       return;
     }
 
