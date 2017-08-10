@@ -1,4 +1,17 @@
-{{#bricks-grid as | grid |}}
+
+<div>
+  <div>
+    columns: {{input type="number" value=columns}}
+  </div>
+  <div>
+    gutter: {{input type="number" value=gutter}}
+  </div>
+</div>
+
+<hr>
+{{#bricks-grid class="number-grid" sizes=(list
+    (hash columns=columns gutter=gutter)
+  ) as | grid |}}
   {{#each items as | i |}}
     {{#grid.item}}
       {{i}}

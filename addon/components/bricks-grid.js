@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Bricks from 'bricks';
 import layout from '../templates/components/bricks-grid';
 
-const { Component, computed } = Ember;
+const { Component, computed, observer, assign} = Ember;
 
 export default Component.extend({
   layout,
@@ -15,13 +15,38 @@ export default Component.extend({
 
   resize: true,
 
+  isPacked: false,
+
   sizes: computed(function() {
     return [
       { columns: 2, gutter: 10 }
     ];
   }),
 
+  container: computed(function() {
+    return this.$('.bricks-container')[0];
+  }),
+
   brickInstance: computed(function() {
+    return this.instantiate();
+  }),
+
+  repackByOptions: observer('sizes.[]', function() {
+    this.disable();
+    this.instantiate();
+  }),
+
+  disable() {
+    const brickInstance = this.get('brickInstance');
+
+    if (brickInstance) {
+      brickInstance.off('pack');
+      brickInstance.off('update');
+      brickInstance.off('resize');
+    }
+  },
+
+  instantiate() {
     const {
       position,
       packed,
@@ -38,7 +63,10 @@ export default Component.extend({
       container: this.$('.bricks-container')[0],
       position,
       packed,
-      sizes,
+      sizes: sizes.map((s) => assign({}, s, {
+        columns: Number(s.columns),
+        gutter: Number(s.gutter),
+      })),
     });
 
     instance.on('pack', () => this.sendAction('pack'));
@@ -46,19 +74,30 @@ export default Component.extend({
     instance.on('resize', (size) => this.sendAction('resize', size));
     instance.resize(resize);
 
+    this.set('brickInstance', instance);
+
+    instance.pack();
+
     return instance;
-  }),
+  },
 
   repack() {
     const {
-      fullReload, brickInstance
+      fullReload, brickInstance, isPacked
     } = this.getProperties(
       'brickInstance',
-      'fullReload'
+      'fullReload',
+      'isPacked'
     );
 
-    if (fullReload) {
+    if (!brickInstance) {
+      return;
+    }
+
+    if (fullReload || !isPacked) {
       brickInstance.pack();
+
+      this.set('isPacked', true);
     } else {
       brickInstance.update();
     }

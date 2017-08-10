@@ -9,5 +9,8 @@ export default Ember.Route.extend({
     }
 
     controller.set('items', arr);
+
+    controller.set('columns', 2);
+    controller.set('gutter', 10);
   }
 });

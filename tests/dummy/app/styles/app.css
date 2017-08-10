@@ -2,3 +2,11 @@
 img {
   width: 400px;
 }
+
+.number-grid {
+  width: 200px;
+}
+
+.number-grid div {
+  width: 10px;
+}
