@@ -1,11 +1,10 @@
+
 import Ember from 'ember';
-import layout from '../../templates/components/bricks-grid/item';
+import Item from './item';
 
-const { Component, on } = Ember;
+const { on } = Ember;
 
-export default Component.extend({
-  layout,
-
+export default Item.extend({
   sendRepackOnInit: on('didInsertElement', function() {
     const img = this.$('img');
 
