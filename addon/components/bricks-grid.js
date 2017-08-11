@@ -23,7 +23,7 @@ export default Component.extend({
     ];
   }),
 
-  container: computed(function() {
+  gridContainer: computed(function() {
     return this.$('.bricks-container')[0];
   }),
 
@@ -60,7 +60,7 @@ export default Component.extend({
     );
 
     const instance = Bricks({
-      container: this.$('.bricks-container')[0],
+      container: this.get('gridContainer'),
       position,
       packed,
       sizes: sizes.map((s) => assign({}, s, {
